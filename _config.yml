@@ -14,7 +14,7 @@ profile: 苟利国家生死以，岂因祸福避趋之？
 #twitter_username: twitter_username
 #github_username:  rusteye
 profile_links:
-  Email: "swydesky@hotmail.com"
+  Email: "mailto:swydesky@hotmail.com"
   GitHub: "https://github.com/rusteye"
   # You can add more profile links above, or edit _includes/sidebar.html 
 
@@ -29,7 +29,7 @@ header:
   links:             # Links on the header. Link to in-site page with a slash as prefix
     About: /about/
     Category: /category/
-    Donate: https://laobubu.net/donate.html
+    #Donate: https://laobubu.net/donate.html
 
 permalink: /archivers/:title
 plugins:
