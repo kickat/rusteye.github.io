@@ -4,15 +4,15 @@ url: "http://rusteye.github.io"    # the protocol and hostname of your site, eg.
 baseurl: "" # the prefix of your site uri, eg. `"/jekyll-theme-EasyBook"` or empty string `""`
 #timezone: Asia/Chongqing
 description: >
-  苟利国家生死以，岂因祸福避趋之？
+  One or more sentences introducing this blog.
 
 # Your information
-email: your_email@example.com
-author: your_name
+email: swydesky@hotmail.com
+author: Shenwy
 avatar: "/img/dont-worry.jpg"
-profile: One sentence introducing yourself.
+profile: 苟利国家生死以，岂因祸福避趋之？
 #twitter_username: twitter_username
-github_username:  rusteye
+#github_username:  rusteye
 profile_links:
   Email: "swydesky@hotmail.com"
   GitHub: "https://github.com/rusteye"
