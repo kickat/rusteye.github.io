@@ -14,7 +14,7 @@ permalink: /archivers/springboot/properties
 
 1、首先有这么几个文件
 
-![1546848259513](/img/2019-01-07-properties/3.png)
+![1546848259513](/img/2019-01-07-properties/1.png)
 
 application.properties
 
