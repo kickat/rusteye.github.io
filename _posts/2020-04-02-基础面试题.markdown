@@ -1,0 +1,202 @@
+---
+layout: post
+title:  "基础面试题"
+date:   2020-04-02 00:00:00
+categories: java
+---
+
+整理下Java基础面试题
+<!--more-->
+
+### 抽象类能使用 final 修饰吗？
+不能，定义抽象类就是让其他类继承的，如果定义为 final 该类就不能被继承，这样彼此就会产生矛盾，所以 final 不能修饰抽象类
+
+### 接口和抽象类有什么区别？
+实现：抽象类的子类使用 extends 来继承；接口必须使用 implements 来实现接口。
+
+构造函数：抽象类可以有构造函数；接口不能有。
+
+实现数量：类可以实现很多个接口；但是只能继承一个抽象类。
+
+访问修饰符：接口中的方法默认使用 public 修饰；抽象类中的方法可以是任意访问修饰符。
+
+### try-catch-finally 中，如果 catch 中 return 了，finally 还会执行吗？
+finally 一定会执行，即使是 catch 中 return 了，catch 中的 return 会等 finally 中的代码执行完之后，才会执行。
+
+### 常见的异常类有哪些？
+
+NullPointerException 空指针异常
+
+ClassNotFoundException 指定类不存在
+
+NumberFormatException 字符串转换为数字异常
+
+IndexOutOfBoundsException 数组下标越界异常
+
+ClassCastException 数据类型转换异常
+
+FileNotFoundException 文件未找到异常
+
+NoSuchMethodException 方法不存在异常
+
+IOException IO 异常
+
+SocketException Socket 异常
+
+### 说一下 HashMap 的实现原理？
+
+HashMap 基于 Hash 算法实现的，我们通过 put(key,value)存储，get(key)来获取。当传入 key 时，HashMap 会根据 key. hashCode() 计算出 hash 值，根据 hash 值将 value 保存在 bucket 里。当计算出的 hash 值相同时，我们称之为 hash 冲突，HashMap 的做法是用链表和红黑树存储相同 hash 值的 value。当 hash 冲突的个数比较少时，使用链表否则使用红黑树。
+
+### 怎么防止死锁？
+
+尽量使用 tryLock(long timeout, TimeUnit unit)的方法(ReentrantLock、ReentrantReadWriteLock)，设置超时时间，超时可以退出防止死锁。
+
+尽量使用 Java. util. concurrent 并发类代替自己手写锁。
+
+尽量降低锁的使用粒度，尽量不要几个功能用同一把锁。
+
+尽量减少同步的代码块。
+
+### 如何实现对象克隆？
+实现 Cloneable 接口并重写 Object 类中的 clone() 方法。
+实现 Serializable 接口，通过对象的序列化和反序列化实现克隆，可以实现真正的深度克隆。
+
+### 深拷贝和浅拷贝区别是什么？
+浅克隆：当对象被复制时只复制它本身和其中包含的值类型的成员变量，而引用类型的成员对象并没有复制。
+深克隆：除了对象本身被复制外，对象所包含的所有成员变量也将复制。
+
+### ArrayList 和 LinkedList 的区别是什么？
+数据结构实现：ArrayList 是动态数组的数据结构实现，而 LinkedList 是双向链表的数据结构实现。
+随机访问效率：ArrayList 比 LinkedList 在随机访问的时候效率要高，因为 LinkedList 是线性的数据存储方式，所以需要移动指针从前往后依次查找。
+增加和删除效率：在非首尾的增加和删除操作，LinkedList 要比 ArrayList 效率要高，因为 ArrayList 增删操作要影响数组内的其他数据的下标。
+
+### final 在 Java 中有什么作用？
+
+final 修饰的类叫最终类，该类不能被继承。
+
+final 修饰的方法不能被重写。
+
+final 修饰的变量叫常量，常量必须初始化，初始化之后值就不能被修改。
+
+### String 类的常用方法都有那些？
+
+indexOf()：返回指定字符的索引。
+
+charAt()：返回指定索引处的字符。
+
+replace()：字符串替换。
+
+trim()：去除字符串两端空白。
+
+split()：分割字符串，返回一个分割后的字符串数组。
+
+getBytes()：返回字符串的 byte 类型数组。
+
+length()：返回字符串长度。
+
+toLowerCase()：将字符串转成小写字母。
+
+toUpperCase()：将字符串转成大写字符。
+
+substring()：截取字符串。
+
+equals()：字符串比较。
+
+### Collections.sort排序内部原理
+
+在Java 6中Arrays.sort()和Collections.sort()使用的是MergeSort，而在Java 7中，内部实现换成了TimSort，其对对象间比较的实现要求更加严格
+
+### hashMap原理，java8做的改变
+
+从结构实现来讲，HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的。HashMap最多只允许一条记录的键为null，允许多条记录的值为null。HashMap非线程安全。ConcurrentHashMap线程安全。解决碰撞：当出现冲突时，运用拉链法，将关键词为同义词的结点链接在一个单链表中，散列表长m，则定义一个由m个头指针组成的指针数组T，地址为i的结点插入以T(i)为头指针的单链表中。Java8中，冲突的元素超过限制（8），用红黑树替换链表。
+
+### String 和 StringBuilder 的区别
+
+1）可变与不可变：String不可变，每一次执行“+”都会新生成一个新对象，所以频繁改变字符串的情况中不用String，以节省内存。
+
+2）是否多线程安全：StringBuilder并没有对方法进行加同步锁，所以是非线程安全的。StringBuffer和String均线程安全。
+
+### Vector 与 Array 的区别
+
+1）ArrayList在内存不够时默认是扩展50% + 1个，Vector是默认扩展1倍。
+
+2）Vector属于线程安全级别的，但是大多数情况下不使用Vector，因为线程安全需要更大的系统开销。
+
+### ArrayList与 LinkedList 的区别？
+
+最明显的区别是
+
+ArrrayList 底层的数据结构是数组，支持随机访问，而 LinkedList 的底层数据结构书链表，不支持随机访问。使用下标访问一个元素，ArrayList 的时间复杂度是 O(1)，而 LinkedList 是 O(n)。LinkedList是双向链表
+
+### 描述 Java 中的重载和重写？
+
+重载和重写都允许你用相同的名称来实现不同的功能，但是重载是编译时活动，而重写是运行时活动。你可以在同一个类中重载方法，但是只能在子类中重写方法。重写必须要有继承
+
+重写：1、在子类中可以根据需要对从基类中继承来的方法进行重写。2、重写的方法和被重写的方法必须具有相同方法名称、参数列表和返回类型。3、重写方法不能使用比被重写的方法更严格的访问权限。
+
+重载的时候，方法名要一样，但是参数类型和个数不一样，返回值类型可以相同也可以不相同。无法以返回型别作为重载函数的区分标准。
+
+### Collection与Collections的区别是什么？
+
+Collection是Java集合框架中的基本接口；
+
+Collections是Java集合框架提供的一个工具类，其中包含了大量用于操作或返回集合的静态方法。
+
+### object中定义了哪些方法？
+
+clone(), equals(), hashCode(), toString(), notify(), notifyAll(),
+
+wait(), finalize(), getClass()
+
+### Java泛型和类型擦除？
+
+泛型即参数化类型，在创建集合时，指定集合元素的类型，此集合只能传入该类型的参数。类型擦除：java编译器生成的字节码不包含泛型信息，所以在编译时擦除：1.泛型用最顶级父类替换；2.移除。
+
+说出 5 个 JDK 1.8 引入的新特性？
+
+Java 8 在 Java 历史上是一个开创新的版本，下面 JDK 8 中 5 个主要的特性：
+
+### Lambda 表达式；允许像对象一样传递匿名函数 Stream API，充分利用现代多核 CPU，可以写出很简洁的代码 ；Date 与 Time API，最终，有一个稳定、简单的日期和时间库可供你使用 扩展方法，现在，接口中可以有静态、默认方法； 重复注解，现在你可以将相同的注解在同一类型上使用多次。
+
+### 说出 5 个 JDK 1.8 引入的新特性？
+
+Java 8 在 Java 历史上是一个开创新的版本，下面 JDK 8 中 5 个主要的特性：
+
+Lambda 表达式；允许像对象一样传递匿名函数 Stream API，充分利用现代多核 CPU，可以写出很简洁的代码 ；Date 与 Time API，最终，有一个稳定、简单的日期和时间库可供你使用 扩展方法，现在，接口中可以有静态、默认方法； 重复注解，现在你可以将相同的注解在同一类型上使用多次。
+
+### java中public，private，protected以及默认关键字的访问范围：
+
+Protected可在包内及包外子类访问，default只能同一包内访问，prvate只能同一类
+
+### 常用数据结构：
+
+集合，线性结构（数组，队列，链表和栈），树形结构，图状结构
+
+### Java 中的 TreeMap 是采用什么树实现的？
+
+Java 中的 TreeMap 是使用红黑树实现的。
+
+### poll() 方法和 remove() 方法的区别？
+
+poll() 和
+
+remove() 都是从队列中取出一个元素，但是 poll() 在获取元素失败的时候会返回空，但是 remove() 失败的时候会抛出异常。
+
+### JVM如何加载一个类的过程，双亲委派模型中有哪些方法
+
+类加载过程：加载、验证（验证阶段作用是保证Class文件的字节流包含的信息符合JVM规范，不会给JVM造成危害）、准备（准备阶段为变量分配内存并设置类变量的初始化）、解析（解析过程是将常量池内的符号引用替换成直接引用）、初始化。
+
+双亲委派模型中方法：双亲委派是指如果一个类收到了类加载的请求，不会自己先尝试加载，先找父类加载器去完成。当顶层启动类加载器表示无法加载这个类的时候，子类才会尝试自己去加载。当回到最开的发起者加载器还无法加载时，并不会向下找，而是抛出ClassNotFound异常。
+
+方法：启动（Bootstrap）类加载器，标准扩展（Extension）类加载器，应用程序类加载器（Application ），上下文(Custom)类加载器。意义是防止内存中出现多份同样的字节码 。
+
+### GC算法（什么样的对象算是可回收对象，可达性分析），CMS收集器
+
+jvm是如何判断一个对象已经变成了可回收的“垃圾”，一般是两个方法：引用记数法和根搜索算法。引用记数法没办法解决循环引用的问题，所以用根搜索。从一系列的”GC Roots“对象开始向下搜索，搜索走过的路径称为引用链。当一个对象到”GC Roots“之间没有引用链时，被称为引用不可达。引用不可到的对象被认为是可回收的对象。
+
+几种垃圾收集器：1，Serial New/Serial Old(串行)，2，Parrallel New (并行)，3，Parrallel Scavenge，4，Parrallel Old，5，CMS（CMS收集器是一个以获得最短回收停顿时间为目标的收集器，它是一种并发收集器，采用的是Mark-sweep算法。），6，G1（是一款并行与并发收集器，并且可建立可预测的停顿时间模型，整体上是基于标记清理，局部采用复制）
+
+### Java 中 WeakReference 与 SoftReference的区别？
+
+Java中一共有四种类型的引用。StrongReference、 SoftReference、 WeakReference 以及 PhantomReference。
+

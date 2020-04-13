@@ -15,7 +15,7 @@ profile: 苟利国家生死以，岂因祸福避趋之？
 #github_username:  rusteye
 profile_links:
   Email: "mailto:swydesky@hotmail.com"
-  GitHub: "https://github.com/rusteye"
+  #GitHub: "https://github.com/rusteye"
   # You can add more profile links above, or edit _includes/sidebar.html 
 
 # Comment Service (Disqus or 多说)
